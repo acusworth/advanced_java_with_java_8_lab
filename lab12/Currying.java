@@ -1,4 +1,4 @@
-package lab14;
+package lab12;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +14,7 @@ public class Currying
                 func = list -> list.stream().reduce(0d, (l, r) -> l + r) / list.size();
                 break;
 
-            case WORSE :
+            case WORST :
                 func = list -> list.stream().min((l, r) -> l < r ? -1 : l > r ? 1 : 0).orElseGet(() -> 0d);
                 break;
 
@@ -31,17 +31,17 @@ public class Currying
 
     public static void main(String... args)
     {
-    	List<Double> scores = Arrays.asList(.65, .75, .85);
+    		List<Double> scores = Arrays.asList(.65, .75, .85);
     	
         System.out.println(curryingFunction.apply(GradeCalcType.AVERAGE).apply(scores));
         System.out.println(curryingFunction.apply(GradeCalcType.BEST).apply(scores));
-        System.out.println(curryingFunction.apply(GradeCalcType.WORSE).apply(scores));
+        System.out.println(curryingFunction.apply(GradeCalcType.WORST).apply(scores));
     }
 
     private enum GradeCalcType
     {
         AVERAGE,
-        WORSE,
+        WORST,
         BEST
     }
 }
